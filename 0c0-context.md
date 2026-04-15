@@ -89,6 +89,7 @@ Tareas:
 - [ ] Colocar los 4 archivos pilares en raíz
 - [ ] Trasplantar de v40 (archivos exactos):
   - Solicitar ruta de v40 a Ω (repos anteriores se proveen on-demand cuando 0c0 las pide)
+  - v40 es material de construcción, no reliquia (D15). Copiar y adaptar, no preservar.
   - `core/llm.py` → copiar entero (streaming, modelo_activo, cargar, descargar)
   - `core/memoria.py` → copiar entero (SQLite, buscar TF-IDF, guardar, hit, degradar)
   - `core/router.py` → copiar SOLO clasificar_señal() y búsqueda de reflejos. NO el router multimodelo.

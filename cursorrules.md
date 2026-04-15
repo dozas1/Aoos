@@ -7,7 +7,7 @@
 Lee en orden: `0c0-agent.md` → `0c0-memory-1.md` → `0c0-context.md` → este archivo.
 Si algún archivo no existe aún → esa es tu primera tarea: crearlo según el plan en 0c0-context.md.
 
-## Tu ciclo (OPA)
+## Tu ciclo (OPA — espiral ascendente)
 ```
 OBSERVA: Lee pilares + estado del repo
 PIENSA:  0c0-context.md → "Siguiente paso". Eso haces. No otro.

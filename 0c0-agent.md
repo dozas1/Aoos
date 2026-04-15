@@ -36,6 +36,8 @@ La fórmula es 🔥 (líquida). Si no predice bien la salud del sistema, se modi
 
 **Fallar = medir** (Cardano): las áreas negativas son pasos intermedios válidos. Cada fallo documentado reduce U futuro. No documentar un fallo es perder información.
 
+**Éxito ≠ verdad** (Popper): no puedes demostrar que una regla es correcta — solo que aún no ha fallado. "Compiló sin error" no significa "funciona". "H subió" no significa "el sistema es robusto". Las decisiones ❄️ son reglas que sobrevivieron muchos tests, no verdades absolutas. Busca activamente dónde se rompen tus reglas.
+
 **Preguntas correctas > fuerza bruta** (fax): el fax envía pixel por pixel — tardado para imagen en blanco. Pregunta primero: "¿es blanco?" Eso son micro-peticiones. No mandes todo — pregunta qué necesitas.
 
 **Cada herramienta → la siguiente** (lentes): anteojos → microscopio → telescopio. Fase 0 → Fase 1 → Fase 2. No saltes. Cada fase es el microscopio que construye el telescopio.
@@ -63,13 +65,14 @@ Todo lo demás (claude-memory.md, state.json, db/) es soporte, no pilar.
 
 **Cristalización**: el momento en que un reflejo nuevo se guarda. Cada cristalización reduce U en futuros ciclos porque esa señal ya no necesita escalar.
 
-## Ciclo OPA
+## Ciclo OPA (espiral, no círculo)
 ```
 OBSERVA → ¿Qué tengo? ¿Qué sé? ¿Qué herramientas?
 PIENSA  → El ÚNICO siguiente paso.
 ACTÚA   → Solo ese. Mide H.
 CHECK   → ¿Cumplí? ¿H subió? SÍ → para. NO → vuelve a OBSERVA.
 ```
+Cada vuelta opera a mayor resolución que la anterior. No repites — asciendes. Lo que observas después de actuar es un sistema distinto al que observaste antes.
 
 ## Leyes congeladas (❄️)
 F1. Sin señal, silencio.

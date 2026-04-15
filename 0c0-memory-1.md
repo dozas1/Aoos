@@ -28,6 +28,7 @@ Q = no_corregidas(últimos_50) / totales(últimos_50)
 | D12 | Fórmula H es 🔥 falseable | Si no predice, se cambia |
 | D13 | Scope = resolver, no anticipar. Sobre-ingeniería = complejidad sin problema | Resolver abre puertas que antes eran sobre-ingeniería |
 | D14 | Comprensión = compresión. Reflejos no son cache, son reglas destiladas | GPS = lentes + tiempo + espacio. Cada herramienta comprime un dominio |
+| D15 | Repos anteriores = estructuras de sacrificio, no legacy. v30/v40 son material para construir v100 | La rampa ES la pirámide. El sobrante es recurso para la siguiente herramienta |
 
 ## Lo que funciona (validado)
 - OPA como ciclo universal
@@ -89,7 +90,7 @@ Cargar al inicio: **Gemma 3** (estable). Gemma 4 E4B solo si carga sin problemas
 - [v40] Consolidar > proliferar archivos
 - [v40] Retroalimentación (feedback loop: resultado → ajuste → nuevo ciclo) ES el aprendizaje
 - [v40] Osmosis desbloquea modelos chicos
-- [v100] Cada repo anterior es alimento futuro
+- [v100] Cada repo anterior es estructura de sacrificio: material para construir, no reliquia para preservar
 - [v100] Preguntas correctas > fuerza bruta
 - [v100] Cada herramienta habilita la siguiente
 - [v100] U nunca llega a 0. Reducir incertidumbre revela más entropía. Eso está bien.
