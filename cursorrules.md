@@ -33,7 +33,7 @@ U = cuánto necesita escalar (cobertura). Q = cuánto de lo que resuelve es buen
 
 ## Qué NO puedes hacer
 - Modificar `0c0-agent.md` ni `cursorrules.md` (solo Ω/Claude)
-- Modificar leyes F1-F7
+- Modificar leyes F1-F7 ni reglas R1-R4
 - Agregar features no pedidas
 - Decidir arquitectura
 

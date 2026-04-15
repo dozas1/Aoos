@@ -7,25 +7,28 @@
 ## Fórmula refinada
 ```
 U = escalaciones_últimos_50 / señales_últimos_50  (cobertura)
-Q = no_corregidas / totales                        (calidad)  
+Q = no_corregidas(últimos_50) / totales(últimos_50)  (calidad, windowed)
 H = (1 - U) × Q                                   (homeostasis)
 ```
-U sola no basta — un reflejo malo baja U pero el sistema es inútil. Q corrige eso. H = cobertura × calidad. Es 🔥 falseable: si no predice salud real, se cambia.
+U y Q usan la misma ventana de 50 ciclos para reaccionar rápido a cambios. Es 🔥 falseable: si no predice salud real, se cambia.
 
 ## Pilares
-- `cursorrules.md` — Cursor mide H, ejecuta context.md, no decide arquitectura
+- `cursorrules.md` — Cursor mide H, ejecuta 0c0-context.md, no decide arquitectura
 - `0c0-agent.md` — constitución + epistemología (Shannon, Cardano, lentes, entropía, incompletitud) + fórmula H con umbrales
 - `0c0-memory-1.md` — tabla de H (runner escribe), decisiones ligadas a fallos, arsenal, modelo default Gemma 3
 - `0c0-context.md` — plan de 5 fases con gates de H, quién escribe qué, trasplante explícito de v40, micro-peticiones como protocolo
 
-## Lo que la fórmula me hizo refinar en los archivos
-- Agregué Q (calidad) — sin ella U era engañable
-- Ventana de 50 ciclos — no all-time
-- Cada fallo ahora ligado a la decisión que informó
-- Modelo default explícito: Gemma 3
-- Tabla "quién escribe qué" elimina ambigüedad
-- Gates de fase con H específico + "quién decide avanzar: Ω"
-- Trasplante de v40 con archivos exactos listados
+## Lo que el loop recursivo refinó (23 iteraciones, H 0.54→0.98)
+- Q windowed a últimos_50 (simétrica con U) — gap en la fórmula original
+- OPA unificado a O→P→A→C en todos los archivos
+- Todas las referencias de archivo corregidas a nombres reales
+- Conceptos core definidos: reflejo, cristalización, 0c0/Ψ relación, σ subtipos, ❄️/🔥/👻
+- Lista canónica de los 4 pilares en agent.md
+- claude-memory.md + state.json + db/ marcados como soporte (no pilares)
+- v40 documentado como recurso on-demand (Ω provee cuando 0c0 pide)
+- Items terse de memory expandidos con contexto operativo
+- R1-R4 protección explicitada en cursorrules.md
+- F4 desambiguado (context window, no archivo)
 
 ## Plan: 5 fases con gates
 | Fase | Qué | Gate H |

@@ -67,7 +67,7 @@ CHECK   → ¿Cumplí? ¿H subió? SÍ → para. NO → vuelve a OBSERVA.
 F1. Sin señal, silencio.
 F2. Clasifica antes de actuar.
 F3. Irreversible requiere Ω.
-F4. Todo persiste. Nada solo en contexto.
+F4. Todo persiste. Nada solo en context window — siempre a archivo.
 F5. Arquitectura requiere Ω.
 F6. 3 ciclos sin progreso → PAUSA.
 F7. Proponer, nunca editar leyes.
