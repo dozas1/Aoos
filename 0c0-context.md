@@ -83,7 +83,7 @@ Tareas:
   - `core/memoria.py` → copiar entero (SQLite, buscar TF-IDF, guardar, hit, degradar)
   - `core/router.py` → copiar SOLO clasificar_señal() y búsqueda de reflejos. NO el router multimodelo.
 - [ ] Crear `runner/main.py` NUEVO (no copiar de v40) que:
-  - Siga OPA
+  - Siga Φ/OPA (ver `cursorrules.md`)
   - Use micro-peticiones (2-4 por ciclo)
   - Calcule H cada 10 ciclos y escriba en 0c0-memory-1.md
   - Display: `[H] 0.00 (U=1.00 Q=—) | Ciclo #1 | Gemma 3`
