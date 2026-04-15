@@ -21,19 +21,21 @@ U = escalaciones_a_λ(últimos_50) / señales_totales(últimos_50)
 Q = respuestas_no_corregidas / respuestas_totales
 H = (1 - U) × Q
 ```
-El runner calcula y registra H cada 10 ciclos en memory.md.
+El runner calcula y registra H cada 10 ciclos en 0c0-memory-1.md.
 Cursor reporta H antes/después de cada cambio.
 Ω decide transiciones de fase basándose en H.
 
 ## Quién escribe qué
 | Archivo | Runner escribe | Cursor escribe | Ω/Claude escribe |
 |---------|---------------|----------------|------------------|
-| .cursorrules | — | — | Todo |
+| cursorrules.md | — | — | Todo |
 | 0c0-agent.md | — | — | Todo |
-| 0c0-memory.md | Tabla H, Aprendizajes | Fallos, Aprendizajes | Decisiones, Leyes |
+| 0c0-memory-1.md | Tabla H, Aprendizajes | Fallos, Aprendizajes | Decisiones, Leyes |
 | 0c0-context.md | — | Checkboxes de tareas | Fases, Gates, Plan |
 | state.json | Todo | Lee | Lee |
 | db/0v0.db | Todo | Lee | — |
+
+**state.json**: estado volátil del runner. Contiene: `ciclo_actual`, `fase`, `modelo_activo`, `U`, `Q`, `H`, `timestamp`. El runner lo escribe cada ciclo. No es fuente de verdad — la fuente es `0c0-memory-1.md`.
 
 ## Micro-peticiones (el protocolo)
 ```
@@ -65,9 +67,9 @@ Estado: 🔥 ACTIVA
 
 ```
 v100-0v0/
-├── .cursorrules
+├── cursorrules.md
 ├── 0c0-agent.md
-├── 0c0-memory.md
+├── 0c0-memory-1.md
 ├── 0c0-context.md
 ├── core/
 │   ├── llm.py
@@ -91,7 +93,7 @@ Tareas:
 - [ ] Crear `runner/main.py` NUEVO (no copiar de v40) que:
   - Siga OPA
   - Use micro-peticiones (2-4 por ciclo)
-  - Calcule H cada 10 ciclos y escriba en memory.md
+  - Calcule H cada 10 ciclos y escriba en 0c0-memory-1.md
   - Display: `[H] 0.00 (U=1.00 Q=—) | Ciclo #1 | Gemma 3`
   - Lea inbox/ para señales de Ω
   - Sin señal → señal interna SIMPLE: "Revisa estado"
@@ -147,7 +149,7 @@ Quién decide avanzar: Ω
 Estado: pendiente
 
 - [ ] El loop detecta patrones → escribe en propuestas/
-- [ ] Propuestas para memory.md y context.md
+- [ ] Propuestas para 0c0-memory-1.md y 0c0-context.md
 - [ ] Ω/Claude revisan
 
 Gate: **H > 0.6** y al menos 1 propuesta útil implementada

@@ -13,9 +13,9 @@ H = (1 - U) × Q                                   (homeostasis)
 U sola no basta — un reflejo malo baja U pero el sistema es inútil. Q corrige eso. H = cobertura × calidad. Es 🔥 falseable: si no predice salud real, se cambia.
 
 ## Pilares
-- `.cursorrules` — Cursor mide H, ejecuta context.md, no decide arquitectura
+- `cursorrules.md` — Cursor mide H, ejecuta context.md, no decide arquitectura
 - `0c0-agent.md` — constitución + epistemología (Shannon, Cardano, lentes, entropía, incompletitud) + fórmula H con umbrales
-- `0c0-memory.md` — tabla de H (runner escribe), decisiones ligadas a fallos, arsenal, modelo default Gemma 3
+- `0c0-memory-1.md` — tabla de H (runner escribe), decisiones ligadas a fallos, arsenal, modelo default Gemma 3
 - `0c0-context.md` — plan de 5 fases con gates de H, quién escribe qué, trasplante explícito de v40, micro-peticiones como protocolo
 
 ## Lo que la fórmula me hizo refinar en los archivos

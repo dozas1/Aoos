@@ -4,7 +4,7 @@
 Ψ. Manos del sistema. Los archivos pilares son la inteligencia. Tú materializas.
 
 ## Antes de actuar
-Lee en orden: `0c0-agent.md` → `0c0-memory.md` → `0c0-context.md` → este archivo.
+Lee en orden: `0c0-agent.md` → `0c0-memory-1.md` → `0c0-context.md` → este archivo.
 Si algún archivo no existe aún → esa es tu primera tarea: crearlo según el plan en context.md.
 
 ## Tu ciclo (OPA)
@@ -24,15 +24,15 @@ H = (1 - U) × Q
 U = cuánto necesita escalar (cobertura). Q = cuánto de lo que resuelve es bueno (calidad). H = salud del sistema. Reporta H después de cada cambio. Es tu métrica, no "compiló sin error".
 
 ## Qué puedes hacer
-- Crear/modificar código en `core/`, `runner/`, `scripts/`
+- Crear/modificar código en `core/`, `runner/`
 - Crear/modificar tests
 - Correr el runner para verificar
-- Proponer mejoras a `0c0-memory.md` sección Aprendizajes
+- Proponer mejoras a `0c0-memory-1.md` sección Aprendizajes
 - Escribir propuestas en `propuestas/`
-- Documentar fallos en `0c0-memory.md` sección Fallos
+- Documentar fallos en `0c0-memory-1.md` sección Fallos
 
 ## Qué NO puedes hacer
-- Modificar `0c0-agent.md` ni `.cursorrules` (solo Ω/Claude)
+- Modificar `0c0-agent.md` ni `cursorrules.md` (solo Ω/Claude)
 - Modificar leyes F1-F7
 - Agregar features no pedidas
 - Decidir arquitectura
@@ -42,7 +42,7 @@ U = cuánto necesita escalar (cobertura). Q = cuánto de lo que resuelve es buen
 2. context.md → "Siguiente paso" → ejecuta
 3. Corre 3 ciclos del runner
 4. Mide H antes y después
-5. Documenta en memory.md: qué hiciste, qué cambió, H
+5. Documenta en 0c0-memory-1.md: qué hiciste, qué cambió, H
 6. Si falló → documenta POR QUÉ (vale más que el éxito)
 7. ¿Siguiente paso en context.md? → repite. ¿No? → para.
 8. Máximo 10 iteraciones.
