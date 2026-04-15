@@ -4,7 +4,7 @@
 ```
 H = (1 - U) × Q
 U = escalaciones_últimos_50 / señales_últimos_50
-Q = no_corregidas / totales
+Q = no_corregidas(últimos_50) / totales(últimos_50)
 ```
 | Ciclo | U | Q | H | Nota |
 |-------|---|---|---|------|
@@ -16,7 +16,7 @@ Q = no_corregidas / totales
 |----|----------|----------|
 | D01 | Inteligencia vive en archivos, no en modelo | Phi-4 "hola" = ecuación |
 | D02 | Micro-peticiones > macro | Gemma no puede "analizar todo" |
-| D03 | Gemma = techo local, no default | Sweet spot validado v40 |
+| D03 | Gemma = techo local, usar con intención (no para trivialidades L0) | Sweet spot validado v40 |
 | D04 | DeepSeek R1 descartado local | 9min, superficial, v40 ciclo 29 |
 | D05 | Orquestador = código, no modelo | P06 del doc de arquitectura |
 | D06 | Cascada L0→L5, no saltar | Propagación controlada |
@@ -31,12 +31,12 @@ Q = no_corregidas / totales
 - OPA como ciclo universal
 - JSON puro como respuesta de λ
 - Anti-inflación R1-R4
-- Cristalización → costo 0
-- TF-IDF + cosine (búsqueda sin deps)
-- Poda automática
-- Streaming + monitoreo actividad > timeout
-- Extracción granular (### → evidencia)
-- Degradación automática
+- Cristalización → costo 0 (ver definición en `0c0-agent.md` § Conceptos clave)
+- TF-IDF + cosine (búsqueda de reflejos sin dependencias externas)
+- Poda automática (reflejos con hit=0 tras N ciclos se eliminan para no inflar SQLite)
+- Streaming + monitoreo actividad > timeout (30s sin output = proceso muerto)
+- Extracción granular (parsear ### headers como evidencia separada, no texto monolítico)
+- Degradación automática (si modelo falla, bajar a siguiente en cascada sin crash)
 - Protocolo universal llm.py
 - Señales Ω (σ.c) bypass reflejos: van directo a λ sin buscar en SQLite
 
@@ -53,6 +53,7 @@ Q = no_corregidas / totales
 | Gemma propone DOC | Premature formalization | Redirigir a capacidades concretas |
 
 ## Patrones tóxicos de Ω
+Cuando 0c0 detecta un patrón, responde con el antídoto (pregunta de redirección).
 | Patrón | Antídoto |
 |--------|----------|
 | Scope explosion | "¿Cuál es la UNA cosa?" |

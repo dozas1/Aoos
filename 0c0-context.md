@@ -18,7 +18,7 @@ H sube → pilares se refinan → (retroalimentación)
 ## Fórmulas
 ```
 U = escalaciones_a_λ(últimos_50) / señales_totales(últimos_50)
-Q = respuestas_no_corregidas / respuestas_totales
+Q = respuestas_no_corregidas(últimos_50) / respuestas_totales(últimos_50)
 H = (1 - U) × Q
 ```
 El runner calcula y registra H cada 10 ciclos en 0c0-memory-1.md.

@@ -18,7 +18,7 @@ CHECK:   ¿Funcionó? Mide H. Reporta.
 ## Las fórmulas que mides
 ```
 U = escalaciones_a_λ(últimos_50) / señales_totales(últimos_50)
-Q = respuestas_no_corregidas / respuestas_totales
+Q = respuestas_no_corregidas(últimos_50) / respuestas_totales(últimos_50)
 H = (1 - U) × Q
 ```
 U = cuánto necesita escalar (cobertura). Q = cuánto de lo que resuelve es bueno (calidad). H = salud del sistema. Reporta H después de cada cambio. Es tu métrica, no "compiló sin error".

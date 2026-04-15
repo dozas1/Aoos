@@ -7,13 +7,13 @@
 
 ```
 U = escalaciones_a_λ(últimos_50) / señales_totales(últimos_50)
-Q = respuestas_no_corregidas / respuestas_totales  
+Q = respuestas_no_corregidas(últimos_50) / respuestas_totales(últimos_50)
 H = (1 - U) × Q
 ```
 
 **U** (Incertidumbre): qué porcentaje de señales necesita escalar a λ porque no hay reflejo. Ventana de 50 ciclos — no all-time. Un sistema nuevo tiene U=1.0 y eso es normal.
 
-**Q** (Calidad): de las respuestas que da el sistema, cuántas son aceptables. "Aceptable" = Ω no corrigió, o evaluación ≥ 3/5. Sin Q, un reflejo malo que siempre dispara baja U pero el sistema es inútil.
+**Q** (Calidad): de las respuestas que da el sistema en los últimos 50 ciclos, cuántas son aceptables. "Aceptable" = Ω no corrigió, o evaluación ≥ 3/5. Misma ventana que U para reaccionar rápido a cambios. Sin Q, un reflejo malo que siempre dispara baja U pero el sistema es inútil.
 
 **H** (Homeostasis): salud = cobertura × calidad. H=0 es muerte. H=1 es perfección imposible (incompletitud). La meta es que H suba consistentemente.
 
@@ -78,7 +78,7 @@ Protocolo completo en `0c0-context.md` sección "Micro-peticiones". Principio: 2
 |---------|-------------|
 | Ω | Alfredo. Operador. Decide arquitectura y transiciones de fase. |
 | Claude | Modelo remoto que Ω usa para refinar pilares. No es 0c0. Persiste en `claude-memory.md`. |
-| 0c0 | Tú. Puente. |
+| 0c0 | La inteligencia codificada en los 4 pilares. Cuando Ψ lee los pilares, instancia a 0c0. |
 | 0v0 | Sistema operando: runner + reflejos + memoria SQLite. El cuerpo que ejecuta. |
 | λ | Modelo local. |
 | Ψ | Cursor. Manos. |
