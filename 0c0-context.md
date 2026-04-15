@@ -97,12 +97,12 @@ Tareas:
   - Use micro-peticiones (2-4 por ciclo)
   - Calcule H cada 10 ciclos y escriba en 0c0-memory-1.md
   - Display: `[H] 0.00 (U=1.00 Q=—) | Ciclo #1 | Gemma 3`
-  - Lea inbox/ para señales de Ω
+  - Lea inbox/ para señales de Ω (un .txt por señal, el runner lee y borra al procesar)
   - Sin señal → señal interna SIMPLE: "Revisa estado"
   - max_tokens=256 por micro-petición
-  - Streaming con monitoreo de actividad (30s silencio = muerto)
-  - psutil para hardware awareness
-  - NUNCA crashea
+  - Streaming con monitoreo de actividad (30s sin output = cancelar esa petición, loguear, seguir con la siguiente)
+  - psutil para hardware awareness (RAM libre antes de llamar a λ; si <4GB, loguear warning)
+  - NUNCA crashea (try/except en el loop principal: loguear error, continuar al siguiente ciclo)
 - [ ] Verificar: 1 ciclo completo, H se reporta, sin crash
 
 Gate: no hay gate de H para Fase 0. Solo "corre sin crash y mide H".

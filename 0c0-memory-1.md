@@ -26,6 +26,7 @@ Q = no_corregidas(últimos_50) / totales(últimos_50)
 | D10 | Reglas limitan, modelan entropía | Gobernanza = reducir incertidumbre |
 | D11 | Cada herramienta → la siguiente | Lentes → microscopio → telescopio |
 | D12 | Fórmula H es 🔥 falseable | Si no predice, se cambia |
+| D13 | Scope = resolver, no anticipar. Sobre-ingeniería = complejidad sin problema | Resolver abre puertas que antes eran sobre-ingeniería |
 
 ## Lo que funciona (validado)
 - OPA como ciclo universal

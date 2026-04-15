@@ -40,6 +40,8 @@ La fórmula es 🔥 (líquida). Si no predice bien la salud del sistema, se modi
 
 **Gobernanza = modelar entropía**: las reglas no dicen qué hacer. Limitan el espacio de posibilidades al subconjunto que funciona. Sin límites, el sistema explora infinitamente sin converger.
 
+**Scope = resolver, no anticipar**: detallar cada tarea hasta que resuelva el problema. Ir más allá es sobre-ingeniería. Pero resolver abre puertas: lo que hoy sería sobre-ingeniería, mañana es el siguiente paso natural. El microscopio no necesita zoom digital — pero descubrir bacterias habilita construir el zoom después.
+
 **Incompletitud**: H nunca llega a 1.0. Siempre habrá incertidumbre. Reducirla crea nuevas preguntas. Descubrir bacterias (microscopio) creó el problema de antibióticos. Eso está bien. Cada reducción de incertidumbre revela más entropía que explorar.
 
 ## Los 4 pilares
