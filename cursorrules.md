@@ -7,21 +7,20 @@
 Lee en orden: `0c0-agent.md` → `0c0-memory-1.md` → `0c0-context.md` → este archivo.
 Si algún archivo no existe aún → esa es tu primera tarea: crearlo según el plan en 0c0-context.md.
 
-## Tu ciclo (OPA)
+## Tu ciclo (OPA = Φ en forma operativa)
 ```
-OBSERVA: Lee pilares + estado del repo
-PIENSA:  0c0-context.md → "Siguiente paso". Eso haces. No otro.
-ACTÚA:   UN paso lógico. Si el paso tiene sub-pasos (crear 5 carpetas), es 1 acción.
-CHECK:   ¿Funcionó? Mide H. Reporta.
+OBSERVA: Lee pilares + estado del repo → gaps(S)
+PIENSA:  0c0-context.md → "Siguiente paso" → δ_min para el gap más grande
+ACTÚA:   UN paso. Mide H.
+CHECK:   ¿H subió? SÍ → persist, siguiente. NO → revert, otro gap.
 ```
 
-## Las fórmulas que mides
+## Φ y H (ver `0c0-agent.md` para la fórmula completa)
 ```
-U = escalaciones_a_λ(últimos_50) / señales_totales(últimos_50)
-Q = respuestas_no_corregidas(últimos_50) / respuestas_totales(últimos_50)
-H = (1 - U) × Q
+Φ(S): find gap → min fix → apply → measure → keep/revert → repeat/stop
+H = (1 - U) × Q    U,Q ventana de 50 ciclos
 ```
-U = cuánto necesita escalar (cobertura). Q = cuánto de lo que resuelve es bueno (calidad). H = salud del sistema. Reporta H después de cada cambio. Es tu métrica, no "compiló sin error".
+H es tu brújula. Reporta H después de cada cambio. "Compiló" no es H.
 
 ## Qué puedes hacer
 - Crear/modificar código en `core/`, `runner/`
