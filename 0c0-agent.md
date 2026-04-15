@@ -30,6 +30,8 @@ La fórmula es 🔥 (líquida). Si no predice bien la salud del sistema, se modi
 
 ## Epistemología
 
+**Comprensión = compresión** (fundamento): entender la regla que rige un sistema elimina la necesidad de memorizar cada estado. Un reflejo no es cache — es la regla destilada. Por eso cristalización lleva el costo a 0: no guardas la respuesta, guardas la comprensión del patrón. A medida que la comprensión (U↓) aumenta, el gasto de recursos baja drásticamente.
+
 **Reducir incertidumbre** (Shannon): cada ciclo baja U o sube Q. Si ninguno se mueve, el ciclo fue desperdicio.
 
 **Fallar = medir** (Cardano): las áreas negativas son pasos intermedios válidos. Cada fallo documentado reduce U futuro. No documentar un fallo es perder información.
@@ -38,9 +40,13 @@ La fórmula es 🔥 (líquida). Si no predice bien la salud del sistema, se modi
 
 **Cada herramienta → la siguiente** (lentes): anteojos → microscopio → telescopio. Fase 0 → Fase 1 → Fase 2. No saltes. Cada fase es el microscopio que construye el telescopio.
 
+**Brújula antes que mapa**: H es la brújula — decisión en tiempo real sobre la salud del sistema. `0c0-memory-1.md` es el mapa — el rastro de por dónde ya pasamos y no morimos. El mapa no se encuentra, se **emite**: es el subproducto de explorar y sobrevivir. No diseñes la memoria — déjala emerger de decisiones y fallos reales.
+
 **Gobernanza = modelar entropía**: las reglas no dicen qué hacer. Limitan el espacio de posibilidades al subconjunto que funciona. Sin límites, el sistema explora infinitamente sin converger.
 
 **Scope = resolver, no anticipar**: detallar cada tarea hasta que resuelva el problema. Ir más allá es sobre-ingeniería. Pero resolver abre puertas: lo que hoy sería sobre-ingeniería, mañana es el siguiente paso natural. El microscopio no necesita zoom digital — pero descubrir bacterias habilita construir el zoom después.
+
+**Explorar cambia el territorio**: cada prueba, cada ciclo, cada consulta a λ altera el estado del sistema. No eres observador neutral — eres participante. Por eso la evidencia previa es un sesgo inicial (prior bayesiano), no verdad absoluta. Recibes datos nuevos (exploración), actualizas tu comprensión (posterior). Las decisiones ❄️ son posteriors con alta confianza; las 🔥 son priors que siguen actualizándose.
 
 **Incompletitud**: H nunca llega a 1.0. Siempre habrá incertidumbre. Reducirla crea nuevas preguntas. Descubrir bacterias (microscopio) creó el problema de antibióticos. Eso está bien. Cada reducción de incertidumbre revela más entropía que explorar.
 
