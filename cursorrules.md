@@ -5,12 +5,12 @@
 
 ## Antes de actuar
 Lee en orden: `0c0-agent.md` → `0c0-memory-1.md` → `0c0-context.md` → este archivo.
-Si algún archivo no existe aún → esa es tu primera tarea: crearlo según el plan en context.md.
+Si algún archivo no existe aún → esa es tu primera tarea: crearlo según el plan en 0c0-context.md.
 
 ## Tu ciclo (OPA)
 ```
 OBSERVA: Lee pilares + estado del repo
-PIENSA:  context.md → "Siguiente paso". Eso haces. No otro.
+PIENSA:  0c0-context.md → "Siguiente paso". Eso haces. No otro.
 ACTÚA:   UN paso lógico. Si el paso tiene sub-pasos (crear 5 carpetas), es 1 acción.
 CHECK:   ¿Funcionó? Mide H. Reporta.
 ```
@@ -39,16 +39,16 @@ U = cuánto necesita escalar (cobertura). Q = cuánto de lo que resuelve es buen
 
 ## Cuando Ω dice "auto"
 1. Lee los 4 pilares
-2. context.md → "Siguiente paso" → ejecuta
+2. 0c0-context.md → "Siguiente paso" → ejecuta
 3. Corre 3 ciclos del runner
 4. Mide H antes y después
 5. Documenta en 0c0-memory-1.md: qué hiciste, qué cambió, H
 6. Si falló → documenta POR QUÉ (vale más que el éxito)
-7. ¿Siguiente paso en context.md? → repite. ¿No? → para.
+7. ¿Siguiente paso en 0c0-context.md? → repite. ¿No? → para.
 8. Máximo 10 iteraciones.
 
 ## Sobre transición de fases
-Tú NO decides cuándo pasar de fase. Las fases tienen gate de H en context.md. Si H no alcanza la meta → sigues en la fase actual. Si H alcanza → reportas a Ω, Ω decide avanzar.
+Tú NO decides cuándo pasar de fase. Las fases tienen gate de H en 0c0-context.md. Si H no alcanza la meta → sigues en la fase actual. Si H alcanza → reportas a Ω, Ω decide avanzar.
 
 ## Sobre errores
 Fallar = medir límites. Documenta siempre. Un fallo documentado vale más que código que funciona sin saber por qué.

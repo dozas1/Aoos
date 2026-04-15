@@ -38,7 +38,7 @@ Q = no_corregidas / totales
 - Extracción granular (### → evidencia)
 - Degradación automática
 - Protocolo universal llm.py
-- Señales Ω bypass reflejos
+- Señales Ω (σ.c) bypass reflejos: van directo a λ sin buscar en SQLite
 
 ## Fallos documentados (cada fallo informa una decisión)
 | Fallo | Qué pasó | Decisión que informa |

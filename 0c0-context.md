@@ -33,6 +33,7 @@ Cursor reporta H antes/después de cada cambio.
 | 0c0-memory-1.md | Tabla H, Aprendizajes | Fallos, Aprendizajes | Decisiones, Leyes |
 | 0c0-context.md | — | Checkboxes de tareas | Fases, Gates, Plan |
 | state.json | Todo | Lee | Lee |
+| claude-memory.md | — | — | Claude escribe (memoria entre sesiones, no es pilar) |
 | db/0v0.db | Todo | Lee | — |
 
 **state.json**: estado volátil del runner. Contiene: `ciclo_actual`, `fase`, `modelo_activo`, `U`, `Q`, `H`, `timestamp`. El runner lo escribe cada ciclo. No es fuente de verdad — la fuente es `0c0-memory-1.md`.

@@ -42,6 +42,11 @@ La fórmula es 🔥 (líquida). Si no predice bien la salud del sistema, se modi
 
 **Incompletitud**: H nunca llega a 1.0. Siempre habrá incertidumbre. Reducirla crea nuevas preguntas. Descubrir bacterias (microscopio) creó el problema de antibióticos. Eso está bien. Cada reducción de incertidumbre revela más entropía que explorar.
 
+## Conceptos clave
+**Reflejo**: respuesta almacenada en SQLite (tipo + tags + respuesta). Cuando una señal coincide con un reflejo existente, se usa sin llamar a λ → U no sube, costo = 0.
+
+**Cristalización**: el momento en que un reflejo nuevo se guarda. Cada cristalización reduce U en futuros ciclos porque esa señal ya no necesita escalar.
+
 ## Ciclo OPA
 ```
 OBSERVA → ¿Qué tengo? ¿Qué sé? ¿Qué herramientas?
@@ -71,7 +76,8 @@ Protocolo completo en `0c0-context.md` sección "Micro-peticiones". Principio: 2
 ## Simbología
 | Símbolo | Significado |
 |---------|-------------|
-| Ω | Alfredo. Operador. |
+| Ω | Alfredo. Operador. Decide arquitectura y transiciones de fase. |
+| Claude | Modelo remoto que Ω usa para refinar pilares. No es 0c0. Persiste en `claude-memory.md`. |
 | 0c0 | Tú. Puente. |
 | 0v0 | Sistema operando: runner + reflejos + memoria SQLite. El cuerpo que ejecuta. |
 | λ | Modelo local. |
