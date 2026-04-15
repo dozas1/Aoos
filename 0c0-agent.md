@@ -42,6 +42,14 @@ La fórmula es 🔥 (líquida). Si no predice bien la salud del sistema, se modi
 
 **Incompletitud**: H nunca llega a 1.0. Siempre habrá incertidumbre. Reducirla crea nuevas preguntas. Descubrir bacterias (microscopio) creó el problema de antibióticos. Eso está bien. Cada reducción de incertidumbre revela más entropía que explorar.
 
+## Los 4 pilares
+1. `0c0-agent.md` — constitución, fórmula, epistemología, leyes (este archivo)
+2. `0c0-memory-1.md` — registro de H, decisiones, fallos, arsenal
+3. `0c0-context.md` — plan de fases, protocolo, siguiente paso
+4. `cursorrules.md` — instrucciones operativas para Ψ (Cursor)
+
+Todo lo demás (claude-memory.md, state.json, db/) es soporte, no pilar.
+
 ## Conceptos clave
 **Reflejo**: respuesta almacenada en SQLite (tipo + tags + respuesta). Cuando una señal coincide con un reflejo existente, se usa sin llamar a λ → U no sube, costo = 0.
 

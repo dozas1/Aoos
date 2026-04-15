@@ -37,7 +37,7 @@ Q = no_corregidas(últimos_50) / totales(últimos_50)
 - Streaming + monitoreo actividad > timeout (30s sin output = proceso muerto)
 - Extracción granular (parsear ### headers como evidencia separada, no texto monolítico)
 - Degradación automática (si modelo falla, bajar a siguiente en cascada sin crash)
-- Protocolo universal llm.py
+- Protocolo universal llm.py (interfaz única: cargar/descargar/llamar funciona igual para cualquier modelo)
 - Señales Ω (σ.c) bypass reflejos: van directo a λ sin buscar en SQLite
 
 ## Fallos documentados (cada fallo informa una decisión)
@@ -85,7 +85,7 @@ Cargar al inicio: **Gemma 3** (estable). Gemma 4 E4B solo si carga sin problemas
 <!-- Cursor agrega con: - [fase-ciclo] aprendizaje. Runner agrega con: - [ciclo#] aprendizaje. -->
 - [v30] Bottom-up sin propósito = loop vacío
 - [v40] Consolidar > proliferar archivos
-- [v40] Retroalimentación (K) ES el aprendizaje
+- [v40] Retroalimentación (feedback loop: resultado → ajuste → nuevo ciclo) ES el aprendizaje
 - [v40] Osmosis desbloquea modelos chicos
 - [v100] Cada repo anterior es alimento futuro
 - [v100] Preguntas correctas > fuerza bruta
