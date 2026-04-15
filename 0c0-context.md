@@ -1,29 +1,16 @@
 # 0c0 — Contexto y Plan de Construcción
 
-## Flujo de inteligencia
+## Φ aplicada a cada nivel
 ```
-Claude refina pilares (inteligencia)
-    ↓
-Pilares = contexto compartido (sin ellos cualquier IA piensa distinto)
-    ↓
-Cursor construye dentro de pilares (manos)
-    ↓
-Runner ejecuta micro-peticiones a λ (código)
-    ↓
-Respuestas → memoria SQLite (acumulación)
-    ↓
-H sube → pilares se refinan → (retroalimentación)
-```
+Φ es la misma en todos los niveles. Solo cambia S:
 
-## Fórmulas
+Ω+Claude    → Φ(pilares)    → refinar archivos         → H_archivos sube
+Cursor (Ψ)  → Φ(código)     → construir/corregir       → H_sistema sube
+Runner      → Φ(señales)    → micro-peticiones a λ      → H_operativo sube
+                    ↑                                          |
+                    └──── memory se emite como subproducto ────┘
 ```
-U = escalaciones_a_λ(últimos_50) / señales_totales(últimos_50)
-Q = respuestas_no_corregidas(últimos_50) / respuestas_totales(últimos_50)
-H = (1 - U) × Q
-```
-El runner calcula y registra H cada 10 ciclos en 0c0-memory-1.md.
-Cursor reporta H antes/después de cada cambio.
-Ω decide transiciones de fase basándose en H.
+Φ completa y H definidas en `0c0-agent.md`. El runner registra H cada 10 ciclos en `0c0-memory-1.md`. Cursor reporta H antes/después. Ω decide transiciones.
 
 ## Quién escribe qué
 | Archivo | Runner escribe | Cursor escribe | Ω/Claude escribe |
@@ -38,30 +25,32 @@ Cursor reporta H antes/después de cada cambio.
 
 **state.json**: estado volátil del runner. Contiene: `ciclo_actual`, `fase`, `modelo_activo`, `U`, `Q`, `H`, `timestamp`. El runner lo escribe cada ciclo. No es fuente de verdad — la fuente es `0c0-memory-1.md`.
 
-## Micro-peticiones (el protocolo)
+## Micro-peticiones — Φ(señal)
 ```
-Señal entra al runner:
+Señal entra al runner → Φ busca δ_min para resolverla:
   1. "Clasifica: {señal}" → {tipo, prioridad}       128 tokens
-  2. Buscar reflejo en SQLite por tipo+tags
-  3. Si reflejo → usar (U no sube). Si no:
-  4. "Responde: {señal}" → {respuesta}               256 tokens  
+  2. Buscar reflejo en SQLite (gap = ¿ya sé esto?)
+  3. Si reflejo → usar (U no sube, costo 0). Si no:
+  4. "Responde: {señal}" → {respuesta}               256 tokens
   5. "Extrae tags: {respuesta}" → {tags}              64 tokens
-  6. Guardar como reflejo → U baja en futuros ciclos
+  6. Cristalizar como reflejo → U baja en futuros ciclos
 ```
-2-4 llamadas por señal. No 1 macro-llamada.
+2-4 llamadas por señal. Cada una es δ_min — la pregunta más chica posible.
 
-## Cascada
+## Cascada — Φ(modelo)
 ```
-Reflejo local → costo 0
-  ↓ no hay
-L0 (<3B) → micro-tarea rápida
-  ↓ no resuelve
-L1 (Gemma) → razonamiento local
-  ↓ no resuelve
-L2→L5 → remoto (futuro)
+Φ prueba el recurso más barato primero (δ_min en costo):
+  Reflejo local → costo 0 (comprensión cristalizada)
+    ↓ no hay
+  L0 (<3B) → micro-tarea rápida
+    ↓ no resuelve
+  L1 (Gemma) → razonamiento local
+    ↓ no resuelve
+  L2→L5 → remoto (futuro)
 ```
 
-## ═══ PLAN DE CONSTRUCCIÓN ═══
+## ═══ PLAN DE CONSTRUCCIÓN — Φ(sistema) a escala macro ═══
+Cada fase es un δ. Los gates son H(S') > umbral. Ω decide persist/next.
 
 ### FASE 0: Esqueleto
 Estado: 🔥 ACTIVA

@@ -32,7 +32,7 @@ Q = no_corregidas(últimos_50) / totales(últimos_50)
 | D16 | Φ comprime todo el sistema en una fórmula auto-referencial. OPA, H, epistemología derivan de Φ | 35 iteraciones recursivas comprimidas a 6 líneas |
 
 ## Lo que funciona (validado)
-- OPA como ciclo universal
+- OPA como Φ operativo (espiral ascendente)
 - JSON puro como respuesta de λ
 - Anti-inflación R1-R4
 - Cristalización → costo 0 (ver definición en `0c0-agent.md` § Conceptos clave)
