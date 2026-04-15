@@ -4,7 +4,7 @@
 ```
 H = (1 - U) × Q
 U = escalaciones_últimos_50 / señales_últimos_50
-Q = no_corregidas / totales
+Q = no_corregidas(últimos_50) / totales(últimos_50)
 ```
 | Ciclo | U | Q | H | Nota |
 |-------|---|---|---|------|
@@ -16,7 +16,7 @@ Q = no_corregidas / totales
 |----|----------|----------|
 | D01 | Inteligencia vive en archivos, no en modelo | Phi-4 "hola" = ecuación |
 | D02 | Micro-peticiones > macro | Gemma no puede "analizar todo" |
-| D03 | Gemma = techo local, no default | Sweet spot validado v40 |
+| D03 | Gemma = techo local, usar con intención (no para trivialidades L0) | Sweet spot validado v40 |
 | D04 | DeepSeek R1 descartado local | 9min, superficial, v40 ciclo 29 |
 | D05 | Orquestador = código, no modelo | P06 del doc de arquitectura |
 | D06 | Cascada L0→L5, no saltar | Propagación controlada |
@@ -26,19 +26,21 @@ Q = no_corregidas / totales
 | D10 | Reglas limitan, modelan entropía | Gobernanza = reducir incertidumbre |
 | D11 | Cada herramienta → la siguiente | Lentes → microscopio → telescopio |
 | D12 | Fórmula H es 🔥 falseable | Si no predice, se cambia |
+| D13 | Scope = resolver, no anticipar. Sobre-ingeniería = complejidad sin problema | Resolver abre puertas que antes eran sobre-ingeniería |
+| D14 | Comprensión = compresión. Reflejos no son cache, son reglas destiladas | GPS = lentes + tiempo + espacio. Cada herramienta comprime un dominio |
 
 ## Lo que funciona (validado)
 - OPA como ciclo universal
 - JSON puro como respuesta de λ
 - Anti-inflación R1-R4
-- Cristalización → costo 0
-- TF-IDF + cosine (búsqueda sin deps)
-- Poda automática
-- Streaming + monitoreo actividad > timeout
-- Extracción granular (### → evidencia)
-- Degradación automática
-- Protocolo universal llm.py
-- Señales Ω bypass reflejos
+- Cristalización → costo 0 (ver definición en `0c0-agent.md` § Conceptos clave)
+- TF-IDF + cosine (búsqueda de reflejos sin dependencias externas)
+- Poda automática (reflejos con hit=0 tras N ciclos se eliminan para no inflar SQLite)
+- Streaming + monitoreo actividad > timeout (30s sin output = proceso muerto)
+- Extracción granular (parsear ### headers como evidencia separada, no texto monolítico)
+- Degradación automática (si modelo falla, bajar a siguiente en cascada sin crash)
+- Protocolo universal llm.py (interfaz única: cargar/descargar/llamar funciona igual para cualquier modelo)
+- Señales Ω (σ.c) bypass reflejos: van directo a λ sin buscar en SQLite
 
 ## Fallos documentados (cada fallo informa una decisión)
 | Fallo | Qué pasó | Decisión que informa |
@@ -53,6 +55,7 @@ Q = no_corregidas / totales
 | Gemma propone DOC | Premature formalization | Redirigir a capacidades concretas |
 
 ## Patrones tóxicos de Ω
+Cuando 0c0 detecta un patrón, responde con el antídoto (pregunta de redirección).
 | Patrón | Antídoto |
 |--------|----------|
 | Scope explosion | "¿Cuál es la UNA cosa?" |
@@ -84,9 +87,11 @@ Cargar al inicio: **Gemma 3** (estable). Gemma 4 E4B solo si carga sin problemas
 <!-- Cursor agrega con: - [fase-ciclo] aprendizaje. Runner agrega con: - [ciclo#] aprendizaje. -->
 - [v30] Bottom-up sin propósito = loop vacío
 - [v40] Consolidar > proliferar archivos
-- [v40] Retroalimentación (K) ES el aprendizaje
+- [v40] Retroalimentación (feedback loop: resultado → ajuste → nuevo ciclo) ES el aprendizaje
 - [v40] Osmosis desbloquea modelos chicos
 - [v100] Cada repo anterior es alimento futuro
 - [v100] Preguntas correctas > fuerza bruta
 - [v100] Cada herramienta habilita la siguiente
 - [v100] U nunca llega a 0. Reducir incertidumbre revela más entropía. Eso está bien.
+- [v100] Comprensión = compresión: entender la regla elimina memorizar cada estado. Costo → 0.
+- [v100] H es brújula (tiempo real), memory es mapa (emitido por exploración). No diseñar el mapa — dejarlo emerger.
