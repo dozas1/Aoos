@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Φ-loop</title>
+<style>
+  :root {
+    --bg: #0e0f12;
+    --panel: #16181d;
+    --border: #262830;
+    --text: #e6e6e6;
+    --muted: #8a8f99;
+    --green: #4ade80;
+    --yellow: #facc15;
+    --red: #f87171;
+    --accent: #38bdf8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+  header {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  h1 { margin: 0; font-size: 1.1rem; letter-spacing: 0.05em; opacity: 0.7; }
+  .h-block { display: flex; align-items: baseline; gap: 0.5rem; }
+  .h-big { font-size: 2.4rem; font-weight: 700; }
+  .h-good { color: var(--green); }
+  .h-mid { color: var(--yellow); }
+  .h-bad { color: var(--red); }
+  .uq { color: var(--muted); font-size: 0.9rem; }
+  .sparkline { margin-left: auto; }
+  main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+  }
+  @media (max-width: 900px) { main { grid-template-columns: 1fr; } }
+  section {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1rem;
+  }
+  section h2 {
+    margin: 0 0 0.75rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  textarea {
+    width: 100%;
+    min-height: 60px;
+    background: #0a0b0e;
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.5rem;
+    font-family: inherit;
+    font-size: 0.95rem;
+    resize: vertical;
+  }
+  button {
+    background: var(--accent);
+    color: #001018;
+    border: none;
+    border-radius: 4px;
+    padding: 0.4rem 0.8rem;
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  button.ghost { background: transparent; color: var(--text); border: 1px solid var(--border); }
+  button.danger { background: var(--red); color: #1a0606; }
+  button.ok { background: var(--green); color: #052010; }
+  button:disabled { opacity: 0.4; cursor: not-allowed; }
+  .row { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; }
+  .pending {
+    margin-top: 0.75rem;
+    padding: 0.75rem;
+    border: 1px dashed var(--accent);
+    border-radius: 4px;
+  }
+  .badge {
+    display: inline-block;
+    padding: 0.1rem 0.5rem;
+    border-radius: 999px;
+    background: #222;
+    color: var(--accent);
+    font-size: 0.8rem;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  th, td {
+    padding: 0.4rem 0.5rem;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+    vertical-align: top;
+  }
+  th { color: var(--muted); font-weight: 500; }
+  .pattern { font-family: ui-monospace, monospace; color: var(--accent); }
+  .source-seed { color: var(--muted); }
+  .source-auto { color: var(--green); }
+  .source-user { color: var(--yellow); }
+  .applied { font-style: italic; color: var(--yellow); }
+  select {
+    background: #0a0b0e;
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.3rem;
+  }
+  .log { max-height: 160px; overflow: auto; font-size: 0.85rem; color: var(--muted); }
+  .log p { margin: 0.2rem 0; }
+  .empty { color: var(--muted); font-style: italic; }
+  .kbd { font-size: 0.75rem; color: var(--muted); }
+</style>
+</head>
+<body>
+<header>
+  <h1>Φ-LOOP · clasificador auto-mejorante</h1>
+  <div class="h-block">
+    <span class="kbd">H</span>
+    <span id="h" class="h-big h-bad">0.00</span>
+  </div>
+  <div class="uq">U=<span id="u">1.00</span> · Q=<span id="q">0.00</span> · ciclos=<span id="cycles-count">0</span></div>
+  <svg id="spark" class="sparkline" width="180" height="40" viewBox="0 0 180 40"></svg>
+</header>
+
+<main>
+  <section>
+    <h2>1 · observar → pensar → actuar</h2>
+    <textarea id="input" placeholder="Mandá una señal (texto libre)…"></textarea>
+    <div class="row" style="margin-top:0.5rem;">
+      <button id="send">enviar señal</button>
+      <span class="kbd">⌘/Ctrl + Enter</span>
+    </div>
+    <div id="pending"></div>
+  </section>
+
+  <section>
+    <h2>2 · feedback (últimos ciclos)</h2>
+    <table>
+      <thead><tr><th>texto</th><th>tipo</th><th>esc</th><th>decisión</th></tr></thead>
+      <tbody id="recent"></tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>3 · reglas</h2>
+    <table>
+      <thead><tr><th>pattern</th><th>tipo</th><th>fuente</th><th>hits</th><th>acc</th><th></th></tr></thead>
+      <tbody id="rules"></tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>4 · propuestas (auto)</h2>
+    <div id="proposals"></div>
+    <h2 style="margin-top:1rem;">log de auto-revert</h2>
+    <div id="revert" class="log"></div>
+  </section>
+</main>
+
+<script>
+const $ = (id) => document.getElementById(id);
+let signalTypes = ["σ.s", "σ.c", "σ.r", "UNKNOWN"];
+let pending = null;
+
+async function api(method, path, body) {
+  const opts = { method, headers: {"Content-Type": "application/json"} };
+  if (body !== undefined) opts.body = JSON.stringify(body);
+  const r = await fetch(path, opts);
+  if (!r.ok) throw new Error(`${r.status} ${await r.text()}`);
+  return r.json();
+}
+
+function colorClass(h) {
+  if (h > 0.5) return "h-good";
+  if (h > 0.2) return "h-mid";
+  return "h-bad";
+}
+
+function renderSpark(history) {
+  const svg = $("spark");
+  svg.innerHTML = "";
+  if (!history.length) return;
+  const W = 180, H = 40, pad = 2;
+  const xs = history.length === 1 ? [W/2] : history.map((_, i) => pad + i * (W - 2*pad) / (history.length - 1));
+  const ys = history.map(s => H - pad - s.H * (H - 2*pad));
+  const d = xs.map((x, i) => `${i ? "L" : "M"}${x.toFixed(1)},${ys[i].toFixed(1)}`).join(" ");
+  const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  path.setAttribute("d", d);
+  path.setAttribute("fill", "none");
+  path.setAttribute("stroke", "#38bdf8");
+  path.setAttribute("stroke-width", "1.5");
+  svg.appendChild(path);
+}
+
+function renderState(s) {
+  signalTypes = s.signal_types;
+
+  const hEl = $("h");
+  hEl.textContent = s.H.toFixed(2);
+  hEl.className = "h-big " + colorClass(s.H);
+  $("u").textContent = s.U.toFixed(2);
+  $("q").textContent = s.Q.toFixed(2);
+  $("cycles-count").textContent = s.cycles_count;
+  renderSpark(s.h_history);
+
+  const recent = $("recent");
+  recent.innerHTML = "";
+  if (!s.recent_cycles.length) {
+    recent.innerHTML = `<tr><td colspan="4" class="empty">aún no hay ciclos</td></tr>`;
+  } else {
+    for (const c of s.recent_cycles) {
+      const decided = c.user_decision === null
+        ? '<span class="empty">pendiente</span>'
+        : c.user_decision ? '✓' : `✗ → ${c.true_type ?? "?"}`;
+      recent.insertAdjacentHTML("beforeend", `
+        <tr>
+          <td>${escapeHtml(c.text)}</td>
+          <td><span class="badge">${c.proposed_type}</span></td>
+          <td>${c.escalated ? '<span class="h-bad">sí</span>' : '<span class="h-good">no</span>'}</td>
+          <td>${decided}</td>
+        </tr>`);
+    }
+  }
+
+  const rules = $("rules");
+  rules.innerHTML = "";
+  if (!s.rules.length) {
+    rules.innerHTML = `<tr><td colspan="6" class="empty">sin reglas</td></tr>`;
+  } else {
+    for (const r of s.rules) {
+      const acc = r.hits ? (r.correct / r.hits * 100).toFixed(0) + "%" : "—";
+      const applied = r.applied_at_cycle !== null ? `<span class="applied">obs</span> ` : "";
+      rules.insertAdjacentHTML("beforeend", `
+        <tr>
+          <td>${applied}<span class="pattern">${escapeHtml(r.pattern)}</span></td>
+          <td><span class="badge">${r.type}</span></td>
+          <td class="source-${r.source}">${r.source}</td>
+          <td>${r.hits}</td>
+          <td>${acc}</td>
+          <td><button class="danger" data-rule="${r.id}">×</button></td>
+        </tr>`);
+    }
+    rules.querySelectorAll("button[data-rule]").forEach(btn => {
+      btn.onclick = async () => {
+        await api("DELETE", `/api/rules/${btn.dataset.rule}`);
+        await refresh();
+      };
+    });
+  }
+
+  const props = $("proposals");
+  props.innerHTML = "";
+  if (!s.proposals.length) {
+    props.innerHTML = `<p class="empty">ninguna propuesta — el sistema descansa.</p>`;
+  } else {
+    for (const p of s.proposals) {
+      props.insertAdjacentHTML("beforeend", `
+        <div class="pending">
+          <div><span class="pattern">${escapeHtml(p.pattern)}</span> → <span class="badge">${p.type}</span></div>
+          <div class="kbd" style="margin:0.3rem 0;">${p.evidence_cycle_ids.length} evidencias</div>
+          <div class="row">
+            <button class="ok" data-apply="${p.id}">aplicar</button>
+            <button class="ghost" data-discard="${p.id}">descartar</button>
+          </div>
+        </div>`);
+    }
+    props.querySelectorAll("button[data-apply]").forEach(btn => {
+      btn.onclick = async () => {
+        await api("POST", `/api/proposals/${btn.dataset.apply}/apply`);
+        await refresh();
+      };
+    });
+    props.querySelectorAll("button[data-discard]").forEach(btn => {
+      btn.onclick = async () => {
+        await api("DELETE", `/api/proposals/${btn.dataset.discard}`);
+        await refresh();
+      };
+    });
+  }
+
+  const log = $("revert");
+  log.innerHTML = s.revert_log.length
+    ? s.revert_log.slice().reverse().map(l => `<p>${escapeHtml(l)}</p>`).join("")
+    : '<p class="empty">sin reverts.</p>';
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+
+async function refresh() {
+  try {
+    const s = await api("GET", "/api/state");
+    renderState(s);
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+function showPending(p) {
+  pending = p;
+  const types = signalTypes.filter(t => t !== "UNKNOWN");
+  const opts = types.map(t => `<option value="${t}" ${t===p.proposed_type?"selected":""}>${t}</option>`).join("");
+  $("pending").innerHTML = `
+    <div class="pending">
+      <div>propuso <span class="badge">${p.proposed_type}</span> ${p.escalated ? '<span class="h-bad">(escalado: nadie matcheó)</span>' : ""}</div>
+      <div class="row" style="margin-top:0.5rem;">
+        <button class="ok" id="accept">✓ aceptar</button>
+        <button class="danger" id="correct">✗ corregir →</button>
+        <select id="true-type">${opts}</select>
+      </div>
+    </div>`;
+  $("accept").onclick = () => decide(true, null);
+  $("correct").onclick = () => decide(false, $("true-type").value);
+}
+
+async function decide(accepted, trueType) {
+  if (!pending) return;
+  await api("POST", `/api/signal/${pending.cycle_id}/decide`, {
+    accepted, true_type: accepted ? null : trueType,
+  });
+  pending = null;
+  $("pending").innerHTML = "";
+  $("input").value = "";
+  $("input").focus();
+  await refresh();
+}
+
+$("send").onclick = async () => {
+  const text = $("input").value.trim();
+  if (!text) return;
+  const r = await api("POST", "/api/signal", { text });
+  showPending(r);
+  await refresh();
+};
+
+$("input").addEventListener("keydown", (e) => {
+  if ((e.metaKey || e.ctrlKey) && e.key === "Enter") $("send").click();
+});
+
+refresh();
+setInterval(() => { if (!pending) refresh(); }, 2000);
+</script>
+</body>
+</html>
